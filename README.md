@@ -9,13 +9,13 @@ This integration is a NeoLoad plugin to be installed in the [Gatling](https://ga
 It allows sending live data from the Gatling test result execution to [Tricentis NeoLoad](https://www.tricentis.com/products/performance-testing-neoload/).
 
 
-| Property                       | Value                                                                                  |
-|--------------------------------|----------------------------------------------------------------------------------------|
-| Maturity                       | Experimental                                                                           |
-| Author                         | Tricentis                                                                              |
-| License                        | [TODO](LICENSE)                                                                        |
-| NeoLoad Web supported versions | SaaS platform, and onPremise from version 3.2                                          |
-| Gatling tested versions        | Version 3.8.4                                                                          |
+| Property                       | Value                                                     |
+|--------------------------------|-----------------------------------------------------------|
+| Maturity                       | Experimental                                              |
+| Author                         | Tricentis                                                 |
+| License                        | [TODO](LICENSE)                                           |
+| NeoLoad Web supported versions | SaaS platform, and onPremise from version 3.2             |
+| Gatling tested versions        | Version 3.9.0                                             |
 | Download releases              | See the [latest release](https://gatling.io/open-source/) |
 
 ## Installation
