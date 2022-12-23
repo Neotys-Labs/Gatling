@@ -1,13 +1,13 @@
 <p align="center"><img src="images/gatling.png" width="40%" alt="gatling Logo" /></p>
 
 # Gatling
+
 NeoLoad plugin for Gatling
 
 ## Overview
 
 This integration is a NeoLoad plugin to be installed in the [Gatling](https://gatling.io/) environment.
 It allows sending live data from the Gatling test result execution to [Tricentis NeoLoad](https://www.tricentis.com/products/performance-testing-neoload/).
-
 
 | Property                       | Value                                                     |
 |--------------------------------|-----------------------------------------------------------|
@@ -23,7 +23,8 @@ It allows sending live data from the Gatling test result execution to [Tricentis
 1. Download [latest release](https://github.com/Neotys-Labs/Gatling/releases/latest) of jar file Gatling.
 2. Put it in folder plugin of the Gatling installation directory, create it if it does not exist.
 3. The altered .sh and .bat files add the `plugins` dir to the classpath ahead of the original gatling classes.
-`GATLING_CLASSPATH="$GATLING_HOME/plugins/*:$GATLING_HOME/lib/*:$GATLING_HOME/user-files:$GATLING_CONF:"`
+   - Windows: `CLASSPATH="$GATLING_HOME/plugins/*:$GATLING_HOME/lib/*:$GATLING_HOME/user-files:$GATLING_CONF:"`
+   - Linux: `CLASSPATH="$GATLING_HOME"\plugin\*;"%GATLING_HOME%"\lib\*;$GATLING_HOME"\user-files:$GATLING_CONF:"`
 
 ## Configuration
 
@@ -31,16 +32,16 @@ In the ``gatling.conf`` add "nlw" to the data writers.
 
 ```yaml
   data {
-    writers = [console, file, nlw]
+    writers = [console, file, neoload]
+    neoload {
+      url = "https://neoload-rest.saas.neotys.com"
+      token = "<your-nlw-token>"
+      workspace = "<your-workspace-id>"
+      testId = "<your-test-id>"
+    }
   }
 
-  nlw {
-	  writePeriod = 1
-	  url = "https://neoload-rest.saas.neotys.com"
-	  token = "<your-nlw-token>"
-	  workspace = "<your-workspace-id>"
-	  testId = "<your-test-id>"
-  }
+ 
 ```
 
 * url: set the URL of the API endpoint for the NeoLoadWeb on premise deployment.
@@ -53,6 +54,13 @@ In the ``gatling.conf`` add "nlw" to the data writers.
 Once the Gatling test starts, a new test is create in NeoLoadWeb, as seen in the "Running Tests" section of the Home page:
 <img src="images/test_starting.png" width="100%" alt="Test starting" />
 
+## Errors
+
+| Code                     | Description                               |
+|--------------------------|-------------------------------------------|
+| GATLING-ILLEGAL-ARGUMENT | An argument is not right or not supported |
+| GATLING-UNKNOWN-HOST     | The host is unknown                       |
+
 ## NeoLoad Web Analysis
 
 ### Test Result Overview
@@ -63,6 +71,7 @@ The Overview tab presents all basic details of the Gatling test.
 More information in the [NeoLoad documentation](https://documentation.tricentis.com/neoload/nlweb/en/WebHelp/#27510.htm).
 
 ### Test Result Values
+
 The Values tab allows sorting elements of a test quickly (Transactions and Requests).
 <img src="images/values.png" width="100%" alt="Values" />
 
