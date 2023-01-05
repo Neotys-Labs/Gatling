@@ -56,10 +56,11 @@ Once the Gatling test starts, a new test is create in NeoLoadWeb, as seen in the
 
 ## Errors
 
-| Code                     | Description                               |
-|--------------------------|-------------------------------------------|
-| GATLING-ILLEGAL-ARGUMENT | An argument is not right or not supported |
-| GATLING-UNKNOWN-HOST     | The host is unknown                       |
+| Code                           | Description                               |
+|--------------------------------|-------------------------------------------|
+| GATLING-ILLEGAL-ARGUMENT       | An argument is not right or not supported |
+| GATLING-UNKNOWN-HOST           | The host is unknown                       |
+| GATLING-SSL-HANDSHAKE          | Ssl Handshake error                       |
 
 ## NeoLoad Web Analysis
 
@@ -94,7 +95,6 @@ More information in the [NeoLoad documentation](https://documentation.tricentis.
 ### Trends
 
 The Trends view makes it possible to visualize and analyze the results of a selected number of tests.
-<img src="images/trends.png" width="100%" alt="Trends" />
 
 More information in the [NeoLoad documentation](https://documentation.tricentis.com/neoload/nlweb/en/WebHelp/#26401.htm).
 
