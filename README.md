@@ -20,19 +20,20 @@ It allows sending live data from the Gatling test result execution to [Tricentis
 
 ## Installation
 
-1. Download [latest release](https://github.com/Neotys-Labs/Gatling/releases/latest) of jar file Gatling.
-2. Put it in folder plugin of the Gatling installation directory, create it if it does not exist.
-3. The altered .sh and .bat files add the `plugins` dir to the classpath ahead of the original gatling classes.
-   - Windows: `CLASSPATH="$GATLING_HOME/plugins/*:$GATLING_HOME/lib/*:$GATLING_HOME/user-files:$GATLING_CONF:"`
-   - Linux: `CLASSPATH="$GATLING_HOME"\plugin\*;"%GATLING_HOME%"\lib\*;$GATLING_HOME"\user-files:$GATLING_CONF:"`
+1. Download [Gatling](https://gatling.io/) and install in a selected directory (we'll call it ``GATLING_DIR``).
+2. Download [latest release](https://github.com/Neotys-Labs/Gatling/releases/latest) of Gatling Neoload plugin (jar + scripts).
+3. Create a new directory called ``plugins`` in ``GATLING_DIR``.
+4. Copy ``gatling.bat`` (Windows) or ``gatling.sh`` (Linux) script in ``GATLING_DIR/bin`` directory
+5. Follow steps in Configuration section.
 
 ## Configuration
 
-In the ``gatling.conf`` add "nlw" to the data writers.
+Open ``GATLING_DIR/conf/gatling.conf`` file and add "neoload" to the data writers:
 
 ```yaml
   data {
     writers = [console, file, neoload]
+    ...
     neoload {
       url = "https://neoload-rest.saas.neotys.com"
       token = "<your-nlw-token>"
@@ -44,14 +45,14 @@ In the ``gatling.conf`` add "nlw" to the data writers.
  
 ```
 
-* url: set the URL of the API endpoint for the NeoLoadWeb on premise deployment.
+* url: Set the URL of the API endpoint for the NeoLoadWeb on premise deployment.
 * token: User API token to authenticate to NeoLoadWeb
-* workspace: the ID of the workspace to send the results to.
-* testId: the ID of the test to send the results to.
+* workspace: The ID of the workspace to send the results to.
+* testId: The ID of the test to send the results to. Not required, if not present an orphan test result will be generated. 
 
 ## Usage
 
-Once the Gatling test starts, a new test is create in NeoLoadWeb, as seen in the "Running Tests" section of the Home page:
+Once the Gatling test starts, a new test is created in NeoLoadWeb, as seen in the "Running Tests" section of the Home page:
 <img src="images/test_starting.png" width="100%" alt="Test starting" />
 
 ## Errors
@@ -95,6 +96,7 @@ More information in the [NeoLoad documentation](https://documentation.tricentis.
 ### Trends
 
 The Trends view makes it possible to visualize and analyze the results of a selected number of tests.
+<img src="images/trends.png" width="100%" alt="Trends" />
 
 More information in the [NeoLoad documentation](https://documentation.tricentis.com/neoload/nlweb/en/WebHelp/#26401.htm).
 
