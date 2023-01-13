@@ -16,7 +16,7 @@ It allows sending live data from the Gatling test result execution to [Tricentis
 | License                        | [TODO](LICENSE)                                           |
 | NeoLoad Web supported versions | SaaS platform, and onPremise from version 3.2             |
 | Gatling tested versions        | Version 3.9.0                                             |
-| Download releases              | See the [latest release](https://gatling.io/open-source/) |
+| Download releases              | See the [latest release](https://github.com/Neotys-Labs/Gatling/releases/latest) |
 
 ## Installation
 
