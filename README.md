@@ -57,11 +57,14 @@ Once the Gatling test starts, a new test is created in NeoLoadWeb, as seen in th
 
 ## Errors
 
-| Code                           | Description                               |
-|--------------------------------|-------------------------------------------|
-| GATLING-ILLEGAL-ARGUMENT       | An argument is not right or not supported |
-| GATLING-UNKNOWN-HOST           | The host is unknown                       |
-| GATLING-SSL-HANDSHAKE          | Ssl Handshake error                       |
+| Code                           | Description                                                                  |
+|--------------------------------|------------------------------------------------------------------------------|
+| GATLING-ILLEGAL-ARGUMENT       | An argument is not right or not supported                                    |
+| GATLING-UNKNOWN-HOST           | The host is unknown                                                          |
+| GATLING-SSL-HANDSHAKE          | Ssl Handshake error                                                          |
+| GATLING-CONNECT-TIMEOUT        | Connection timeout                                                           |
+| GATLING-CLOSED-CHANNEL         | Attempt to I/O operation upon channel that is closed                         |
+| GATLING-BIND                   | Error occurred while attempting to bind a socket to a local address and port |
 
 ## NeoLoad Web Analysis
 
@@ -102,8 +105,17 @@ More information in the [NeoLoad documentation](https://documentation.tricentis.
 
 ## Troubleshooting
 
-TODO
+Some tests ramping up to a high number of VU's (> 1000) can need to increase VM memory:
+
+``gatling.bat -erjo "-Xmx2g"``
+Or
+``gatling.sh -erjo "-Xmx2g"``
 
 ## ChangeLog
 
-TODO
+First version. Features:
+- All Gatling metrics
+- Group hierarchical structure
+- Throughput and TTFB for requests
+- Check violations on Event errors
+- Monitor metrics (Memory, CPU, User load)
