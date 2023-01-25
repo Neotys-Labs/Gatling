@@ -21,18 +21,32 @@ It allows sending live data from the Gatling test result execution to [Tricentis
 ## Installation
 
 1. Download [Gatling](https://gatling.io/) and install in a selected directory (we'll call it ``GATLING_DIR``).
-2. Download [latest release](https://github.com/Neotys-Labs/Gatling/releases/latest) of Gatling Neoload plugin (jar + scripts).
-3. Create a new directory called ``plugins`` in ``GATLING_DIR``.
-4. Copy ``gatling.bat`` (Windows) or ``gatling.sh`` (Linux) script in ``GATLING_DIR/bin`` directory
+2. Download [latest release](https://github.com/Neotys-Labs/Gatling/releases/latest) of Gatling Neoload plugin:
+   1. Jar file ``Gatling-Neoload-[version].jar``
+   2. Script ``gatling.bat`` if you are in Windows or ``gatling.sh`` if you are in Linux.
+3. Create a new directory called ``plugins`` in ``GATLING_DIR`` and copy jar file inside.
+4. Copy downloaded ``gatling.bat`` (Windows) or ``gatling.sh`` (Linux) script in ``GATLING_DIR/bin`` overwriting existing scripts.
 5. Follow steps in Configuration section.
 
 ## Configuration
 
-Open ``GATLING_DIR/conf/gatling.conf`` file and add "neoload" to the data writers:
+- Open ``GATLING_DIR/conf/gatling.conf`` and go to the end of the file.
+- In the data section uncomment line ``writers = [console, file, ...]``
+- Delete ``console`` writer from writers list.
+- Add ``neoload`` writer to writers list.
+- At the end of the ``data`` sections add a new ``neoload`` section with the following parameters:
+  - ``url``: Set the URL of the API endpoint for the NeoLoadWeb on premise deployment.
+  - ``token``: User API token to authenticate to NeoLoadWeb
+  - ``workspace``: The ID of the workspace to send the results to.
+  - ``testId``: The ID of the test to send the results to. Not required, if not present an orphan test result will be generated.
+
+Example: 
 
 ```yaml
   data {
-    writers = [console, file, neoload]
+    writers = [file, neoload]
+    ...
+    Don
     ...
     neoload {
       url = "https://neoload-rest.saas.neotys.com"
@@ -44,11 +58,6 @@ Open ``GATLING_DIR/conf/gatling.conf`` file and add "neoload" to the data writer
 
  
 ```
-
-* url: Set the URL of the API endpoint for the NeoLoadWeb on premise deployment.
-* token: User API token to authenticate to NeoLoadWeb
-* workspace: The ID of the workspace to send the results to.
-* testId: The ID of the test to send the results to. Not required, if not present an orphan test result will be generated. 
 
 ## Usage
 
@@ -105,11 +114,11 @@ More information in the [NeoLoad documentation](https://documentation.tricentis.
 
 ## Troubleshooting
 
-Some tests ramping up to a high number of VU's (> 1000) can need to increase VM memory:
-
-``gatling.bat -erjo "-Xmx2g"``
-Or
-``gatling.sh -erjo "-Xmx2g"``
+- Some tests ramping up to a high number of VU's (> 1000) can need to increase VM memory:
+  ``gatling.bat -erjo "-Xmx2g"``
+  Or
+  ``gatling.sh -erjo "-Xmx2g"``
+- A stable connexion is highly recommended.
 
 ## ChangeLog
 
